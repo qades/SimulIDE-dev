@@ -1,1 +1,48 @@
-resources/qm/*.*
+# Build outputs
+build_*/
+build/
+Makefile
+.qmake.stash
+
+# Qt generated files
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+qrc_*.h
+
+# Qt build directories
+.qt/
+
+# Executables
+executables/
+*.exe
+*.out
+
+# Object files
+*.o
+*.obj
+*.lo
+
+# Compiled libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# IDE files
+.vscode/
+.idea/
+*.pro.user
+*.pro.user.*
+
+# Debug files
+*.dSYM/
+*.su
+
+# Resources (compiled translations)
+resources/qm/*
+
+# Temporary files
+*.tmp
+*.log
+*~

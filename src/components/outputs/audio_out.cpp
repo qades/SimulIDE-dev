@@ -98,6 +98,7 @@ AudioOut::AudioOut( QString type, QString id )
         qDebug() << m_format.sampleRate() << m_format.channelCount()<<m_format.sampleSize();
     }
     m_audioOutput = new QAudioOutput( m_deviceinfo, m_format );
+    m_audioOutput->setBufferSize( m_format.sampleRate() * 2 ); // 2 sec buffer to handle sim slowdown
 
     addPropGroup( { tr("Main"), {
         new BoolProp<AudioOut>("Buzzer", tr("Buzzer"), ""
@@ -176,21 +177,22 @@ void AudioOut::runEvent()
 
     m_dataBuffer.append( (char)outVal );
 
-    if( m_dataBuffer.size() == m_dataSize )
+    // Write when we have enough data or audio buffer has space
+    int bytesToWrite = qMin( m_dataBuffer.size(), m_audioOutput->bytesFree() );
+    if( bytesToWrite > 0 )
     {
-        m_audioBuffer->write( m_dataBuffer.data(), m_dataSize );
-        m_dataBuffer.clear();
+        int written = m_audioBuffer->write( m_dataBuffer.data(), bytesToWrite );
+        if( written > 0 ) m_dataBuffer.remove( 0, written );
     }
-    double realSpeed = Simulator::self()->realSpeed();
-    if( realSpeed < 1e-6 )
+    // Handle underrun: if audio output is idle and we have buffered data, restart
+    if( m_audioOutput->state() == QAudio::IdleState && !m_dataBuffer.isEmpty() )
     {
-        realSpeed = Simulator::self()->psPerSec();
-        realSpeed /= 1e8;
+        int written = m_audioBuffer->write( m_dataBuffer.data(), m_dataBuffer.size() );
+        if( written > 0 ) m_dataBuffer.remove( 0, written );
     }
-    realSpeed *= (1e12/10000);
-
-    uint64_t nextEvent = realSpeed/m_format.sampleRate();
-    Simulator::self()->addEvent( nextEvent, this ); // 25 us
+    // Generate next sample at correct audio sample rate
+    uint64_t nextEvent = 1e12 / m_format.sampleRate(); // Time per sample in ps
+    Simulator::self()->addEvent( nextEvent, this );
 }
 
 void AudioOut::setImpedance( double i )
