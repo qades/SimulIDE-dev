@@ -1,20 +1,24 @@
-# Build outputs
-build_*/
-build/
-Makefile
-.qmake.stash
+# Build outputs within build directory
+build_XX/.qmake.stash
+build_XX/Makefile
+build_XX/build/
+build_XX/executables/
+build_XX/moc_*.cpp
+build_XX/ui_*.h
+build_XX/qrc_*.cpp
+build_XX/qrc_*.h
+build_XX/objects/
+build_XX/moc/
 
-# Qt generated files
+# Qt generated files (if not in build dir)
 moc_*.cpp
 ui_*.h
 qrc_*.cpp
-qrc_*.h
 
 # Qt build directories
 .qt/
 
-# Executables
-executables/
+# Executables (root level)
 *.exe
 *.out
 
