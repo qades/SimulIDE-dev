@@ -247,6 +247,7 @@
         
         <file alias="sr04.svg">../src/icons/components/sr04.svg</file>
         <file alias="sr04_ico.png">../src/icons/components/sr04_ico.png</file>
+        <file alias="schmitttrigger.svg">../src/icons/components/schmitttrigger.svg</file>
         <file alias="ky-023.png">../src/icons/components/ky-023.png</file>
         <file alias="ky-040.png">../src/icons/components/ky-040.png</file>
         <file alias="dht11.svg">../src/icons/components/dht11.svg</file>

@@ -22,6 +22,7 @@
 #include "clock.h"
 #include "comparator.h"
 #include "counter.h"
+#include "schmitttrigger.h"
 #include "csource.h"
 #include "currsource.h"
 #include "dac.h"
@@ -213,6 +214,7 @@ void ItemLibrary::loadItems()
     addItem( new LibraryItem( QObject::tr("Other Active"), "Active", "2to2.png","Other Active", nullptr ) );
     addItem( OpAmp::libraryItem() );
     addItem( Comparator::libraryItem() );
+    addItem( SchmittTrigger::libraryItem() );
     addItem( VoltReg::libraryItem() );
     addItem( MuxAnalog::libraryItem() );
     // Outputs
