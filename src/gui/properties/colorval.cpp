@@ -71,6 +71,14 @@ void ColorVal::changeColor()
 
 void ColorVal::updtValues()
 {
+    if( m_blocked ) return;
+    m_blocked = true;
 
+    colorW->setText( m_property->getValStr() );
+    QColor color( colorW->text() );
+    QString style = "border: 1px solid black; background-color: "+color.name()+";";
+    colorW->setStyleSheet( style );
+
+    m_blocked = false;
 }
 

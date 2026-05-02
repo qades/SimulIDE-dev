@@ -20,6 +20,7 @@ class PropVal : public QWidget
 
         virtual void setup( bool isComp )=0;
         virtual void updtValues() {;}
+        virtual void setFocusToInput() { setFocus(); }
 
         virtual QString getValWithUnit() { return ""; }
 

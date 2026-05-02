@@ -44,8 +44,10 @@ void BoolVal::on_trueVal_toggled( bool checked )
 
 void BoolVal::updtValues()
 {
+    if( m_blocked ) return;
     m_blocked = true;
-    bool checked = (m_property->getValStr() == "true");
-    trueVal->setChecked( checked );
+
+    trueVal->setChecked( m_property->getValStr() == "true" );
+
     m_blocked = false;
 }

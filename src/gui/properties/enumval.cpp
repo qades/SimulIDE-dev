@@ -86,7 +86,10 @@ void EnumVal::updtValues()
 {
     if( m_blocked ) return;
     m_blocked = true;
-    showVal->setChecked( m_component->getPropStr("ShowProp") == m_propName );
+
+    QString val = m_property->getValStr();
+    valueBox->setCurrentText( val );
+
     m_blocked = false;
 }
 

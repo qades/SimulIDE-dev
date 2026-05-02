@@ -19,7 +19,7 @@ class PathVal : public PropVal, private Ui::PathVal
         PathVal( PropDialog* parent, CompBase* comp, ComProperty* prop, bool isFile );
         ~PathVal();
 
-        virtual void setup( bool ) override;
+        virtual void setup( bool isComp ) override;
         virtual void updtValues() override;
 
     public slots:

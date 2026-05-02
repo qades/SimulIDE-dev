@@ -21,6 +21,7 @@ class StrVal : public PropVal, private Ui::StrVal
 
         virtual void setup( bool ) override;
         virtual void updtValues() override;
+        virtual void setFocusToInput() override;
 
     public slots:
         void on_value_editingFinished();

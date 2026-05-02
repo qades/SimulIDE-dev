@@ -135,3 +135,9 @@ QString NumVal::getValWithUnit()
     return valStr;
 }
 
+void NumVal::setFocusToInput()
+{
+    valueBox->setFocus();
+    if( valueBox->lineEdit() ) valueBox->lineEdit()->selectAll();
+}
+

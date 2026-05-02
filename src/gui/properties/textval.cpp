@@ -60,5 +60,10 @@ void TextVal::updatValue()
 
 void TextVal::updtValues()
 {
+    if( m_blocked ) return;
+    m_blocked = true;
 
+    textBox->setText( m_property->getValStr() );
+
+    m_blocked = false;
 }

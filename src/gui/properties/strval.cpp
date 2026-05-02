@@ -41,6 +41,16 @@ void StrVal::on_value_editingFinished()
 
 void StrVal::updtValues()
 {
-    QString text = m_property->getValStr();
-    value->setText( text );
+    if( m_blocked ) return;
+    m_blocked = true;
+
+    value->setText( m_property->getValStr() );
+
+    m_blocked = false;
+}
+
+void StrVal::setFocusToInput()
+{
+    value->setFocus();
+    value->selectAll();
 }

@@ -7,6 +7,9 @@
 #include "component.h"
 #include "circuit.h"
 
+#include <QShowEvent>
+#include <QTimer>
+
 #include "labelval.h"
 #include "numval.h"
 #include "pathval.h"
@@ -184,6 +187,29 @@ void PropDialog::on_helpButton_clicked()
     helpText->setVisible( m_helpExpanded );
 
     adjustWidgets();
+}
+
+void PropDialog::showEvent(QShowEvent* event)
+{
+    QDialog::showEvent(event);
+    QTimer::singleShot(0, this, [this]() {
+        this->activateWindow();
+        QWidget* tab = tabList->currentWidget();
+        if( tab && tab->layout() )
+        {
+            for( int i=0; i<tab->layout()->count(); ++i )
+            {
+                QLayoutItem* item = tab->layout()->itemAt(i);
+                if( !item ) continue;
+                PropVal* w = dynamic_cast<PropVal*>(item->widget());
+                if( w && w->isVisible() && w->isEnabled() )
+                {
+                    w->setFocusToInput();
+                    break;
+                }
+            }
+        }
+    });
 }
 
 void PropDialog::adjustWidgets()

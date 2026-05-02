@@ -50,6 +50,10 @@ void PathVal::on_setPathButton_clicked()
 
 void PathVal::updtValues()
 {
-    QString text = m_property->getValStr();
-    value->setText( text );
+    if( m_blocked ) return;
+    m_blocked = true;
+
+    value->setText( m_property->getValStr() );
+
+    m_blocked = false;
 }

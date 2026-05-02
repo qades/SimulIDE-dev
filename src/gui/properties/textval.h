@@ -18,7 +18,7 @@ class TextVal : public PropVal, private Ui::TextVal
     public:
         TextVal( PropDialog* parent, CompBase* comp, ComProperty* prop );
         ~TextVal();
-        
+
         virtual void setup( bool isComp ) override;
         virtual void updtValues() override;
 

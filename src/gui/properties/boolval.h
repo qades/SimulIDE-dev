@@ -18,8 +18,8 @@ class BoolVal : public PropVal, private Ui::BoolVal
     public:
         BoolVal( PropDialog* parent, CompBase* comp, ComProperty* prop );
         ~BoolVal();
-        
-        virtual void setup( bool ) override;
+
+        virtual void setup( bool isComp ) override;
         virtual void updtValues() override;
 
     public slots:

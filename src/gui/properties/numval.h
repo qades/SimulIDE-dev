@@ -21,6 +21,7 @@ class NumVal : public PropVal, private Ui::NumVal
 
         virtual void setup( bool isComp ) override;
         virtual void updtValues() override;
+        virtual void setFocusToInput() override;
 
         virtual QString getValWithUnit() override;
 

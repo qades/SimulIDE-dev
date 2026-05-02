@@ -19,7 +19,7 @@ class ColorVal : public PropVal, private Ui::ColorVal
         ColorVal( PropDialog* parent, CompBase* comp, ComProperty* prop );
         ~ColorVal();
 
-        virtual void setup( bool ) override;
+        virtual void setup( bool isComp ) override;
         virtual void updtValues() override;
 
         bool eventFilter( QObject* object, QEvent* event) override;
